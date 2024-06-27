@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link href="../css/bootstrap.min.css"
+        th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+  <div class="py-5 text-center">
+    <h2>영화 목록</h2>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary float-end"
+              onclick="location.href='addForm.html'"
+              th:onclick="|location.href='@{/api/movies/add}'|"
+              type="button">영화 등록</button>
+    </div>
+  </div>
+  <hr class="my-4">
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>영화 제목</th>
+        <th>감독</th>
+        <th>관람가</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><a href="movies.html">1</a></td>
+        <td><a href="movies.html">제목A</a></td>
+        <td>감독A</td>
+        <td>전체관람가</td>
+      </tr>
+      <tr>
+        <td><a href="item.html">2</a></td>
+        <td><a href="item.html">제목B</a></td>
+        <td>감독B</td>
+        <td>15세이상</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+</body>
+</html>
