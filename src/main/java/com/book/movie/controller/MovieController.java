@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -30,6 +31,13 @@ public class MovieController {
     public void init() {
         movieRepository.save(new Movie("영화A", "감독A", "OVER15"));
         movieRepository.save(new Movie("영화B", "감독B", "ALL"));
+    }
+
+    @GetMapping("/{movieId}")
+    public String movie(@PathVariable Long movieId, Model model){
+        Movie movie = movieRepository.findById(movieId);
+        model.addAttribute("movie", movie);
+        return "api/movie";
     }
 
 }

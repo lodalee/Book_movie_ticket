@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>영화 상세</h2>
+    </div>
+    <div>
+        <label for="movieId">영화 ID</label>
+        <input type="text" id="movieId" name="movieId" class="form-control"
+               value="1" th:value="${movie.id}" readonly>
+    </div>
+    <div>
+        <label for="movieTitle">영화 제목</label>
+        <input type="text" id="movieTitle" name="movieTitle" class="form-control"
+               value="영화" th:value="${movie.movieTitle}" readonly>
+    </div>
+    <div>
+        <label for="director">영화 감독</label>
+        <input type="text" id="director" name="director" class="form-control"
+               value="감독" th:value="${movie.director}" readonly>
+    </div>
+    <div>
+        <label for="filmRating">관람가</label>
+        <input type="text" id="filmRating" name="filmRating" class="form-control"
+               value="관람가" th:value="${movie.filmRating}" readonly>
+    </div>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{/api/movies/{movieId}/edit(movieId=${movie.id})}'|" type="button">영화 수정</button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='movies.html'"
+                    th:onclick="|location.href='@{/api/movies}'|"
+                    type="button">목록으로</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
