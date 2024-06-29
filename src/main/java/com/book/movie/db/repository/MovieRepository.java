@@ -1,6 +1,7 @@
 package com.book.movie.db.repository;
 
 import com.book.movie.db.entity.Movie;
+import com.book.movie.db.entity.enumType.FilmRating;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class MovieRepository{
         Movie findMovie = findById(movieId);
         findMovie.setMovieTitle(updateParam.getMovieTitle());
         findMovie.setDirector(updateParam.getDirector());
+        findMovie.setFilmRating(FilmRating.valueOf(updateParam.getFilmRating().name()));
     }
 
     public void clearStore() {

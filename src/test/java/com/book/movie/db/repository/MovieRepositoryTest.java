@@ -58,7 +58,7 @@ class MovieRepositoryTest {
         Long movieId = savedMovie.getId();
 
         //when
-        Movie updateParam = new Movie("제목2", "감독B");
+        Movie updateParam = new Movie("제목2", "감독B", "OVER15");
         movieRepository.update(movieId, updateParam);
 
         Movie findMovie = movieRepository.findById(movieId);
@@ -66,5 +66,6 @@ class MovieRepositoryTest {
         //then
         assertThat(findMovie.getMovieTitle()).isEqualTo(updateParam.getMovieTitle());
         assertThat(findMovie.getDirector()).isEqualTo(updateParam.getDirector());
+        assertThat(findMovie.getFilmRating()).isEqualTo(updateParam.getFilmRating());
     }
 }

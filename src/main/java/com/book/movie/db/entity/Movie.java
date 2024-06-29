@@ -22,10 +22,5 @@ public class Movie {
         this.filmRating = FilmRating.valueOf(filmRating);
     }
 
-    public Movie(String movieTitle, String director) {
-        this.movieTitle = movieTitle;
-        this.director = director;
-    }
-
 //==비즈니스 로직==//
 }
