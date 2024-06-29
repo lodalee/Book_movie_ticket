@@ -1,34 +1,35 @@
 package com.book.movie.controller;
 
+import com.book.movie.db.entity.Movie;
+import com.book.movie.db.repository.MovieRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequiredArgsConstructor
+import java.util.List;
+
+@Controller
 @RequestMapping("/api/movies")
+@RequiredArgsConstructor
 public class MovieController {
 
-//    private final MovieRepository movieRepository;
-//
-//    //영화 목록 조회
-//    @GetMapping
-//    public String movies(Model model) {
-//        List<Movie> movies = movieRepository.findAll();
-//
-//        List<MovieResponseDto> responseDtos = (List<MovieResponseDto>) movies.stream()
-//                .map(m-> new MovieResponseDto(m.getId(), m.getMovieTitle(), m.getFilmRating()))
-//                .collect(Collectors.toList());
-//        model.addAttribute("responseDtos", responseDtos);
-//        return "api/movies";
-//    }
-//
-//    //테스트용 데이터 추가
-//    @PostConstruct
-//    public void init() {
-//        movieRepository.save(new Movie("영화1","감독A", FilmRating.valueOf("ALL")));
-//        movieRepository.save(new Movie("영화2","감독B", FilmRating.valueOf("OVER15")));
-//    }
+    private final MovieRepository movieRepository;
 
+    @GetMapping()
+    public String moviesV1(Model model) {
+        List<Movie> movies = movieRepository.findAll();
+        model.addAttribute("movies", movies);
+        return "api/movies";
+    }
+
+    //테스트용 데이터 추가
+    @PostConstruct
+    public void init() {
+        movieRepository.save(new Movie("영화A", "감독A", "OVER15"));
+        movieRepository.save(new Movie("영화B", "감독B", "ALL"));
+    }
 
 }

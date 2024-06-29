@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <title>영화 목록</title>
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+  <div class="py-5 text-center">
+    <h2>영화 목록</h2>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary float-end"
+              onclick="location.href='addForm.html'"
+              th:onclick="|location.href='@{/api/movies/add}'|"
+              type="button">영화 등록</button>
+    </div>
+  </div>
+
+  <hr class="my-4">
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>영화 제목</th>
+        <th>감독</th>
+        <th>관람가</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="movie : ${movies}">
+        <td><a href="movie.html" th:href="@{/api/movies/{movieId}.(movieId=${movie.id})}"
+               th:text="${movie.id}">영화 ID</a> </td>
+
+        <td><a href="movie.html" th:href="@{|/api/movies/${movie.id}|}"
+               th:text="${movie.movieTitle}">영화 제목</a> </td>
+        <td th:text="${movie.director}">영화 감독</td>
+        <td th:text="${movie.filmRating}">rhksfkark</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+
+</body>
+</html>
