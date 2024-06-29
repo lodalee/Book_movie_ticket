@@ -6,9 +6,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,10 +32,20 @@ public class MovieController {
     }
 
     @GetMapping("/{movieId}")
-    public String movie(@PathVariable Long movieId, Model model){
+    public String movie(@PathVariable Long movieId, Model model) {
         Movie movie = movieRepository.findById(movieId);
         model.addAttribute("movie", movie);
         return "api/movie";
     }
 
+    @GetMapping("/add")
+    public String addForm() {
+        return "api/addForm";
+    }
+
+    @PostMapping("/add")
+    public String addItem(@ModelAttribute Movie movie) {
+        movieRepository.save(movie);
+        return "api/movie";
+    }
 }

@@ -34,8 +34,7 @@
       </thead>
       <tbody>
       <tr th:each="movie : ${movies}">
-        <td><a href="movie.html" th:href="@{/api/movies/{movieId}.(movieId=${movie.id})}"
-               th:text="${movie.id}">영화 ID</a> </td>
+        <td th:text="${movie.id}">ID</td>
 
         <td><a href="movie.html" th:href="@{|/api/movies/${movie.id}|}"
                th:text="${movie.movieTitle}">영화 제목</a> </td>
