@@ -2,6 +2,8 @@ package com.book.movie.controller;
 
 import com.book.movie.db.entity.Movie;
 import com.book.movie.db.repository.MovieRepository;
+import com.book.movie.model.MoviesResponse;
+import com.book.movie.service.MovieService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/api/movies")
@@ -17,13 +20,25 @@ import java.util.List;
 public class MovieController {
 
     private final MovieRepository movieRepository;
+    private final MovieService movieService;
+
+
+    //전체 조회
+//    @GetMapping()
+//    public String moviesV1(Model model) {
+//        List<Movie> movies = movieRepository.findAll();
+//        model.addAttribute("movies", movies);
+//        return "api/movies";
+//    }
 
     @GetMapping()
-    public String moviesV1(Model model) {
-        List<Movie> movies = movieRepository.findAll();
-        model.addAttribute("movies", movies);
+    public String moviesV2(Model model) {
+        List<MoviesResponse> moviesResponses = movieService.getAllMovies();
+        model.addAttribute("movies", moviesResponses);
+
         return "api/movies";
     }
+
 
     //테스트용 데이터 추가
     @PostConstruct
