@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -44,10 +45,13 @@ public class MovieController {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Movie movie) {
-        movieRepository.save(movie);
-        return "api/movie";
+    public String addItem(Movie movie, RedirectAttributes redirectAttributes) {
+        Movie savedMovie = movieRepository.save(movie);
+        redirectAttributes.addAttribute("movieId", savedMovie.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/api/movies/{movieId}";
     }
+
 
     @GetMapping("/{movieId}/edit")
     public String editForm(@PathVariable Long movieId, Model model) {
@@ -61,4 +65,5 @@ public class MovieController {
         movieRepository.update(movieId, movie);
         return "redirect:/api/movies/{movieId}";
     }
+
 }

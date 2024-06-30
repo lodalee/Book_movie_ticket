@@ -15,6 +15,10 @@
     <div class="py-5 text-center">
         <h2>영화 상세</h2>
     </div>
+
+    <!--추가 -->
+    <h2 th:if="${param.status}" th:text="'저장 완료!'"></h2>
+
     <div>
         <label for="movieId">영화 ID</label>
         <input type="text" id="movieId" name="movieId" class="form-control"
