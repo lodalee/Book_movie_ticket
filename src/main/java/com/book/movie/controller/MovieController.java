@@ -39,4 +39,12 @@ public class MovieController {
         movieRepository.save(new Movie("영화A", "감독A", "OVER15"));
         movieRepository.save(new Movie("영화B", "감독B", "ALL"));
     }
+
+    @PostMapping("/add")
+    public String addItem(Movie movie, RedirectAttributes redirectAttributes) {
+        Movie savedMovie = movieRepository.save(movie);
+        redirectAttributes.addAttribute("movieId", savedMovie.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/api/movies/{movieId}";
+    }
 }
