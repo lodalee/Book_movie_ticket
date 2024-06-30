@@ -28,7 +28,11 @@
     </div>
     <div>
       <label for="filmRating">관람가</label>
-      <input type="text" id="filmRating" name="filmRating" class="form-control" placeholder="ALL, OVER15, OVER18 의 값만 입력해주세요">
+      <select id="filmRating" name="filmRating" class="form-control">
+        <option value="ALL">전체 관람가</option>
+        <option value="OVER15">15세 이상 관람가</option>
+        <option value="OVER18">18세 이상 관람가</option>
+      </select>
     </div>
     <hr class="my-4">
     <div class="row">

@@ -1,7 +1,9 @@
 package com.book.movie.controller;
 
 import com.book.movie.db.entity.Movie;
+import com.book.movie.db.entity.enumType.FilmRating;
 import com.book.movie.db.repository.MovieRepository;
+import com.book.movie.model.MovieRequest;
 import com.book.movie.model.MoviesResponse;
 import com.book.movie.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +33,12 @@ public class MovieControllerV2 {
     @GetMapping("/{movieId}")
     public String movie(@PathVariable Long movieId, Model model) {
         MoviesResponse moviesResponse = movieService.getMovieById(movieId);
-        if (moviesResponse != null) {
-            model.addAttribute("movie", moviesResponse);
-        } else {
+
+        if (moviesResponse == null) {
             model.addAttribute("error", "Movie not found");
         }
+
+        model.addAttribute("movie", moviesResponse);
         return "api/movie";
     }
 
@@ -45,13 +48,12 @@ public class MovieControllerV2 {
     }
 
     @PostMapping("/add")
-    public String addMovie(Movie movie, RedirectAttributes redirectAttributes) {
-        Movie savedMovie = movieRepository.save(movie);
+    public String addMovie(MovieRequest movieRequest, RedirectAttributes redirectAttributes) {
+        Movie savedMovie = movieService.addMovie(movieRequest);
         redirectAttributes.addAttribute("movieId", savedMovie.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/api/movies/{movieId}";
     }
-
 
     @GetMapping("/{movieId}/edit")
     public String editForm(@PathVariable Long movieId, Model model) {
