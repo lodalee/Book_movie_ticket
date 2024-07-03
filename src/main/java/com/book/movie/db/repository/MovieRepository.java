@@ -2,6 +2,7 @@ package com.book.movie.db.repository;
 
 import com.book.movie.db.entity.Movie;
 import com.book.movie.db.entity.enumType.FilmRating;
+import com.book.movie.model.MovieRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -29,8 +30,13 @@ public class MovieRepository{
         return new ArrayList<>(store.values());
     }
 
-    public void update(Long movieId, Movie updateParam) {
+    public void update(Long movieId, MovieRequest updateParam) {
         Movie findMovie = findById(movieId);
+
+        if (findMovie == null) {
+            throw new NullPointerException();
+        }
+
         findMovie.setMovieTitle(updateParam.getMovieTitle());
         findMovie.setDirector(updateParam.getDirector());
         findMovie.setFilmRating(FilmRating.valueOf(updateParam.getFilmRating().name()));

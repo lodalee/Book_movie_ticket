@@ -10,4 +10,10 @@ public class MovieRequest {
     private String movieTitle;
     private String director;
     private FilmRating filmRating;
+
+    public MovieRequest(String movieTitle, String director, String filmRating) {
+        this.movieTitle = movieTitle;
+        this.director = director;
+        this.filmRating = FilmRating.valueOf(filmRating);
+    }
 }

@@ -31,13 +31,13 @@ public class MovieService {
     }
 
     public MoviesResponse getMovieById(Long movieId) {
-        Optional<Movie> optionalMovie = Optional.ofNullable(movieRepository.findById(movieId));
-        return optionalMovie.map(movie -> new MoviesResponse(
-                movie.getId(),
-                movie.getMovieTitle(),
-                movie.getDirector(),
-                movie.getFilmRating().name()
-        )).orElse(null);
+        return Optional.ofNullable(movieRepository.findById(movieId))
+                .map(movie -> new MoviesResponse(
+                        movie.getId(),
+                        movie.getMovieTitle(),
+                        movie.getDirector(),
+                        movie.getFilmRating().name()
+                )).orElse(null);
     }
 
     public Movie addMovie(MovieRequest movieRequest) {

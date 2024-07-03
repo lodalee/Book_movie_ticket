@@ -57,14 +57,14 @@ public class MovieControllerV2 {
 
     @GetMapping("/{movieId}/edit")
     public String editForm(@PathVariable Long movieId, Model model) {
-        Movie movie = movieRepository.findById(movieId);
-        model.addAttribute("movie", movie);
+        Movie Movie = movieRepository.findById(movieId);
+        model.addAttribute("movie", Movie);
         return "api/editForm";
     }
 
     @PostMapping("/{movieId}/edit")
-    public String edit(@PathVariable Long movieId, @ModelAttribute Movie movie) {
-        movieRepository.update(movieId, movie);
+    public String edit(@PathVariable Long movieId, MovieRequest movieRequest) {
+        movieRepository.update(movieId, movieRequest);
         return "redirect:/api/movies/{movieId}";
     }
 
